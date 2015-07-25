@@ -1,10 +1,15 @@
 package com.roalts.hackdelhiclient;
 
+import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class RechargeActivity extends AppCompatActivity {
 
@@ -14,6 +19,19 @@ public class RechargeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recharge);
         String uuid = getIntent().getStringExtra("uuid");
         Log.d("uuid" , uuid);
+        final TextView stringPayment = (TextView) findViewById(R.id.string_payment);
+        Button copyToClipboard = (Button) findViewById(R.id.copy_payment);
+        copyToClipboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String stringYouExtracted = stringPayment.getText().toString();
+                stringYouExtracted = stringYouExtracted.substring(0, stringYouExtracted.length()-1);
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                clipboard.setText(stringYouExtracted);
+                Toast.makeText(getApplicationContext(), "Copied", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
     }
 
     @Override
