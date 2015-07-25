@@ -12,8 +12,8 @@ public class RechargeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recharge);
-        String udid = getIntent().getStringExtra("udid");
-        Log.d("udid" , udid);
+        String uuid = getIntent().getStringExtra("uuid");
+        Log.d("uuid" , uuid);
     }
 
     @Override

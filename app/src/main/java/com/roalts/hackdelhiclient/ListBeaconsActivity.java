@@ -153,7 +153,7 @@ public class ListBeaconsActivity extends BaseActivity {
                 if (getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY) != null) {
 
                     Intent intent = new Intent(ListBeaconsActivity.this, RechargeActivity.class);
-                    intent.putExtra("udid", adapter.getItem(position).getProximityUUID());
+                    intent.putExtra("uuid", adapter.getItem(position).getProximityUUID());
                     startActivity(intent);
 
                 }
