@@ -1,6 +1,7 @@
 package com.roalts.hackdelhiclient;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,12 +62,22 @@ public class BeaconListAdapter extends BaseAdapter {
     private void bind(Beacon beacon, View view) {
         ViewHolder holder = (ViewHolder) view.getTag();
         if(Utils.computeAccuracy(beacon) < 1.00) {
-            Log.d("Value : ", "" + Utils.computeAccuracy(beacon));
-            holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
-            holder.majorTextView.setText("Major: " + beacon.getMajor());
-            holder.minorTextView.setText("Minor: " + beacon.getMinor());
-            holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
-            holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+
+            if(Integer.valueOf(App.MINOR) == beacon.getMinor() && Integer.valueOf(App.MAJOR) == beacon.getMajor()){
+                Log.d("Value : ", "" + Utils.computeAccuracy(beacon));
+                holder.macTextView.setText(String.format("NAME: %s (%.2fm)", App.NAME, Utils.computeAccuracy(beacon)));
+                holder.majorTextView.setText("Major: " + beacon.getMajor());
+                holder.minorTextView.setText("Minor: " + beacon.getMinor());
+                holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
+                holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+            } else {
+                Log.d("Value : ", "" + Utils.computeAccuracy(beacon));
+                holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
+                holder.majorTextView.setText("Major: " + beacon.getMajor());
+                holder.minorTextView.setText("Minor: " + beacon.getMinor());
+                holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
+                holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+            }
         }
     }
 

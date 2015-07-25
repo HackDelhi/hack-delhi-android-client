@@ -10,10 +10,14 @@ import com.parse.ParseFacebookUtils;
  */
 public class App extends Application {
 
+    public static String NAME;
+    public static String MAJOR;
+    public static String MINOR;
     @Override
     public void onCreate() {
         super.onCreate();
         Parse.initialize(this, "NIVI1mr35p6Am42KX01qrZkA5rv6xzhk3c2ttf2x", "3zEfmm9ZuL4XgEt9JJbnYqvTQfDNXkXDjOQdIq7D");
         ParseFacebookUtils.initialize(this);
+
     }
 }
