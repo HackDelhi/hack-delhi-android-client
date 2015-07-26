@@ -1,6 +1,8 @@
 package com.roalts.hackdelhiclient;
 
 import android.content.ClipboardManager;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +22,11 @@ public class RechargeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recharge);
         String uuid = getIntent().getStringExtra("uuid");
         Log.d("uuid" , uuid);
+        String text = "1CNeB6jQSJqRebnrvYFhb1rdfhZJXM56Kz";
+        ImageView imageView = (ImageView) findViewById(R.id.qrcode_payment);
+        imageView.setImageResource(R.drawable.crypt);
         final TextView stringPayment = (TextView) findViewById(R.id.string_payment);
+        stringPayment.setText(text);
         Button copyToClipboard = (Button) findViewById(R.id.copy_payment);
         copyToClipboard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +37,18 @@ public class RechargeActivity extends AppCompatActivity {
                 clipboard.setText(stringYouExtracted);
                 Toast.makeText(getApplicationContext(), "Copied", Toast.LENGTH_SHORT)
                         .show();
+
+                Intent intent = getPackageManager().getLaunchIntentForPackage("com.mycelium.testnetwallet");
+                try {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    // No app!
+                    intent = new Intent(Intent.ACTION_VIEW);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse("market://details?id=" + "com.mycelium.testnetwallet"));
+                    startActivity(intent);
+                }
             }
         });
     }
