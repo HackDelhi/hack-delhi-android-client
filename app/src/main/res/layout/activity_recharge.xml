@@ -42,4 +42,5 @@
         android:layout_gravity="center_horizontal"
         android:text="Copy to Clipboard"
         android:id="@+id/copy_payment"/>
+
 </LinearLayout>

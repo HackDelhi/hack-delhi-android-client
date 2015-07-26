@@ -13,6 +13,10 @@ public class App extends Application {
     public static String NAME;
     public static String MAJOR;
     public static String MINOR;
+
+    public static String FRIEND_NAME;
+    public static String FRIEND_MAJOR;
+    public static String FRIEND_MINOR;
     @Override
     public void onCreate() {
         super.onCreate();

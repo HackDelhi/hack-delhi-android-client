@@ -1,7 +1,6 @@
 package com.roalts.hackdelhiclient;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,9 +62,15 @@ public class BeaconListAdapter extends BaseAdapter {
         ViewHolder holder = (ViewHolder) view.getTag();
         if(Utils.computeAccuracy(beacon) < 1.00) {
 
-            if(Integer.valueOf(App.MINOR) == beacon.getMinor() && Integer.valueOf(App.MAJOR) == beacon.getMajor()){
+            if(Integer.valueOf(App.MINOR) == beacon.getMinor() && Integer.valueOf(App.MAJOR) == beacon.getMajor()) {
                 Log.d("Value : ", "" + Utils.computeAccuracy(beacon));
                 holder.macTextView.setText(String.format("NAME: %s (%.2fm)", App.NAME, Utils.computeAccuracy(beacon)));
+                holder.majorTextView.setText("Major: " + beacon.getMajor());
+                holder.minorTextView.setText("Minor: " + beacon.getMinor());
+                holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
+                holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+            } else if(Integer.valueOf(App.FRIEND_MINOR) == beacon.getMinor() && Integer.valueOf(App.FRIEND_MAJOR) == beacon.getMajor()){
+                holder.macTextView.setText(String.format("NAME: %s (%.2fm)", App.FRIEND_NAME, Utils.computeAccuracy(beacon)));
                 holder.majorTextView.setText("Major: " + beacon.getMajor());
                 holder.minorTextView.setText("Minor: " + beacon.getMinor());
                 holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());

@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.parse.ParseUser;
 
@@ -27,20 +26,65 @@ public class MainActivity extends AppCompatActivity {
         App.MINOR = sharedPref.getString("minor", "0");
         App.NAME = sharedPref.getString("name", "Hello");
 
+        App.FRIEND_MAJOR = sharedPref.getString("friend_major", "0");
+        App.FRIEND_MINOR = sharedPref.getString("friend_minor", "0");
+        App.FRIEND_NAME = sharedPref.getString("friend_name", "Hello");
+
 //        if ((parseUser == null)) {
 //            Intent i = new Intent(this, LoginActivity.class);
 //            startActivity(i);
 //            finish();
 //        } else {
-        Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT)
-                .show();
+//        Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT)
+//                .show();
+
         Button recharge = (Button) findViewById(R.id.recharge);
+        Button addMyBuddy = (Button) findViewById(R.id.add_buddy);
+        Button bheedStatus = (Button) findViewById(R.id.bheed_status);
+
         recharge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ListBeaconsActivity.class);
                 intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, NotifyDemoActivity.class.getName());
                 startActivity(intent);
+            }
+        });
+
+        addMyBuddy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog customDialog = new Dialog(MainActivity.this);
+                customDialog.setContentView(R.layout.add_uuid);
+                customDialog.setTitle("Add your buddy");
+                customDialog.setCancelable(true);
+
+                final EditText minor = (EditText) customDialog.findViewById(R.id.minor);
+                final EditText name = (EditText) customDialog.findViewById(R.id.name);
+                final EditText major = (EditText) customDialog.findViewById(R.id.major);
+                Button buttonDone = (Button) customDialog.findViewById(R.id.done_button);
+
+                buttonDone.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String nameOfUser = name.getText().toString();
+                        if (!nameOfUser.equalsIgnoreCase("")) {
+                            customDialog.dismiss();
+                            App.FRIEND_NAME = name.getText().toString();
+                            App.FRIEND_MAJOR = major.getText().toString();
+                            App.FRIEND_MINOR = minor.getText().toString();
+                            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString("friend_major", App.FRIEND_MAJOR);
+                            editor.putString("friend_minor", App.FRIEND_MINOR);
+                            editor.putString("friend_name", App.FRIEND_NAME);
+                            editor.commit();
+                        } else {
+                            name.setError("Please Enter the Name");
+                        }
+                    }
+                });
+                customDialog.show();
             }
         });
 //        }
@@ -96,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
             customDialog.show();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
