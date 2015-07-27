@@ -42,6 +42,18 @@ public class MainActivity extends AppCompatActivity {
         Button addMyBuddy = (Button) findViewById(R.id.add_buddy);
         Button bheedStatus = (Button) findViewById(R.id.bheed_status);
 
+        bheedStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = getPackageManager().getLaunchIntentForPackage("io.cordova.myapp00e508");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } catch (Exception e) {
+
+                }
+            }
+        });
         recharge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
