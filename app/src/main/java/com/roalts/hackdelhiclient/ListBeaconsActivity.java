@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
-import com.estimote.sdk.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,9 +67,9 @@ public class ListBeaconsActivity extends BaseActivity {
                         // distance between device and beacon.
                         List<Beacon> newBeacons = new ArrayList<Beacon>();
                         for(int i = 0; i < beacons.size(); i++) {
-                            if(Utils.computeAccuracy(beacons.get(i)) < 1.00) {
+
                                 newBeacons.add(beacons.get(i));
-                            }
+
                         }
                         toolbar.setSubtitle("Found beacons: " + newBeacons.size());
                         adapter.replaceWith(newBeacons);
@@ -153,7 +152,7 @@ public class ListBeaconsActivity extends BaseActivity {
                 if (getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY) != null) {
 
                     Intent intent = new Intent(ListBeaconsActivity.this, RechargeActivity.class);
-                    intent.putExtra("uuid", adapter.getItem(position).getProximityUUID());
+                    intent.putExtra("uid", adapter.getItem(position).getProximityUUID());
                     startActivity(intent);
 
                 }
