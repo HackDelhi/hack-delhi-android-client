@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +20,7 @@ public class RechargeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recharge);
         String uuid = getIntent().getStringExtra("uuid");
-        Log.d("uuid" , uuid);
+//        Log.d("uuid" , uuid);
         String text = "1CNeB6jQSJqRebnrvYFhb1rdfhZJXM56Kz";
         ImageView imageView = (ImageView) findViewById(R.id.qrcode_payment);
         imageView.setImageResource(R.drawable.crypt);
