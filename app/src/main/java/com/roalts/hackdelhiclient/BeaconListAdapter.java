@@ -60,30 +60,28 @@ public class BeaconListAdapter extends BaseAdapter {
 
     private void bind(Beacon beacon, View view) {
         ViewHolder holder = (ViewHolder) view.getTag();
-        if(Utils.computeAccuracy(beacon) < 1.00) {
 
             if(Integer.valueOf(App.MINOR) == beacon.getMinor() && Integer.valueOf(App.MAJOR) == beacon.getMajor()) {
                 Log.d("Value : ", "" + Utils.computeAccuracy(beacon));
                 holder.macTextView.setText(String.format("NAME: %s (%.2fm)", App.NAME, Utils.computeAccuracy(beacon)));
                 holder.majorTextView.setText("Major: " + beacon.getMajor());
                 holder.minorTextView.setText("Minor: " + beacon.getMinor());
-                holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
-                holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+//                holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
+//                holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
             } else if(Integer.valueOf(App.FRIEND_MINOR) == beacon.getMinor() && Integer.valueOf(App.FRIEND_MAJOR) == beacon.getMajor()){
                 holder.macTextView.setText(String.format("NAME: %s (%.2fm)", App.FRIEND_NAME, Utils.computeAccuracy(beacon)));
                 holder.majorTextView.setText("Major: " + beacon.getMajor());
                 holder.minorTextView.setText("Minor: " + beacon.getMinor());
-                holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
-                holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+//                holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
+//                holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
             } else {
                 Log.d("Value : ", "" + Utils.computeAccuracy(beacon));
                 holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
                 holder.majorTextView.setText("Major: " + beacon.getMajor());
                 holder.minorTextView.setText("Minor: " + beacon.getMinor());
-                holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
-                holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+//                holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
+//                holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
             }
-        }
     }
 
     private View inflateIfRequired(View view, int position, ViewGroup parent) {
@@ -98,15 +96,15 @@ public class BeaconListAdapter extends BaseAdapter {
         final TextView macTextView;
         final TextView majorTextView;
         final TextView minorTextView;
-        final TextView measuredPowerTextView;
-        final TextView rssiTextView;
+//        final TextView measuredPowerTextView;
+//        final TextView rssiTextView;
 
         ViewHolder(View view) {
             macTextView = (TextView) view.findViewWithTag("mac");
             majorTextView = (TextView) view.findViewWithTag("major");
             minorTextView = (TextView) view.findViewWithTag("minor");
-            measuredPowerTextView = (TextView) view.findViewWithTag("mpower");
-            rssiTextView = (TextView) view.findViewWithTag("rssi");
+//            measuredPowerTextView = (TextView) view.findViewWithTag("mpower");
+//            rssiTextView = (TextView) view.findViewWithTag("rssi");
         }
     }
 }
